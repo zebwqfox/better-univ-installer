@@ -25,3 +25,13 @@ jobs:
 
     - name: Build project
       run: cargo +nightly build -Z build-std=std,panic_abort -Z build-std-features=panic_immediate_abort --release --target=x86_64-pc-windows-msvc
+
+    - name: Post-build steps
+      run: |
+        if exist target\x86_64-pc-windows-msvc\release\better-qqnt-x64.dll (
+          echo DLL file found
+          REM 添加你需要对 DLL 文件执行的操作
+        ) else (
+          echo DLL file not found
+          exit 1
+        )
